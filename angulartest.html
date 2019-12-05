@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+        function disp_prompt_machine(){
+            var machine_Des=prompt("Description","");
+            var mashine_Sname=prompt("ShortName","");
+            //flag.input.one.value=machine_Des;
+            //alert("machine 添加完成"+flag.input.one.value);
+            alert(machine_Des);
+            location.href="collectionSendToExcel.action?querybean.billNo=" + billNo+"&customer.SOrgCode"+SOrgCode+"&account.SAccountNo"+account+"&account.SCustBankCode"+SCustBankCode;
+        }
+        function disp_prompt_domain(){
+            var domain_Des=prompt("Description","");
+            var domain_Sname=prompt("ShortName","");
+            var domain_Physical_Property=prompt("Physical Property: GivenDomain/DesignDomain","");
+            var domain_DomainType=prompt("DomainType: Causal/Biddable/Lexical","");
+            alert("domain添加完成");
+        }
+        function disp_prompt_interaction(){
+            var interaction_Initiator=prompt("Initiator:","");
+            var interaction_Phenomenon=prompt("Phenomenon","");
+            var interaction_Type=prompt("Type: event/state/value","");
+            alert("interaction添加完成");
+        }
+        function disp_prompt_requirement(){
+            var requirement_Des=prompt("Description","");
+            alert("requirement 添加完成");
+        }
+        function disp_prompt_reference(){
+            var reference_Initiator=prompt("Initiator","");
+            var reference_Receiver=prompt("Receiver","");
+            var reference_Phenomenon=prompt("Phenomenon","");
+            var reference_Type=prompt("Type: event/state/value","");
+            var reference_Constraint=prompt("Constraint: yes/no","");
+            alert("reference 添加完成");
+        }
+    </script>
+    <title>画图工具</title>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+</head>
+<body>
+
+<div id="container" style="width:100%">
+
+    <div id="header" style="background-color:#FFA500;">
+        <h1 style="margin-bottom:0;">画图工具</h1></div>
+
+    <div id="menu" style="background-color:#FFD700;height:800px;width:20%;float:left;">
+        <b>菜单</b><br>
+        Mashine<input type="button" onclick="disp_prompt_machine()" value="下一步" id="one" /><br>
+        Domains<input type="button" onclick="disp_prompt_domain()" value="下一步" /><br>
+        interaction<input type="button" onclick="disp_prompt_interaction()" value="增加" />
+        <input type="button" onclick="disp_prompt()" value="删除" />
+        <input type="button" onclick="disp_prompt()" value="查询" />
+        <input type="button" onclick="disp_prompt()" value="修改" /><br>
+        requirement<input type="button" onclick="disp_prompt_requirement()" value="下一步" /><br>
+        references<input type="button" onclick="disp_prompt_reference()" value="增加" /><br>
+        </div>
+    <div id="content" style="background-color:#FFFFFF;height:800px;width:80%;float:left;">
+        内容在这里
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=200px height=400px>
+            <polygon points="100,20 20,90 60,160 140,160 180,90"
+                     style=" fill:white; stroke:black; stroke-width:2 "/>
+            <text x="200" y="150" dx="-100" dy="5"  textLength="200">
+                kkk
+            </text>
+        </svg>
+    </div>
+
+    <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">版权 © ECNU</div>
+
+</div>
+
+<script>
+
+    var width = 300;    //画布的宽度
+    var height = 300;   //画布的高度
+
+    var svg = d3.select("body")             //选择文档中的body元素
+        .append("svg")              //添加一个svg元素
+        .attr("width", width)       //设定宽度
+        .attr("height", height);    //设定高度
+
+    var dataset = [ 250 , 210 , 170 , 130 , 90 ];
+
+    var rectHeight = 25;    //每个矩形所占的像素高度(包括空白)
+
+    svg.selectAll("rect")
+        .data(dataset)
+        .enter()
+        .append("rect")
+        .attr("x",20)
+        .attr("y",function(d,i){
+            return i * rectHeight;
+        })
+        .attr("width",function(d){
+            return d;
+        })
+        .attr("height",rectHeight-2)
+        .attr("fill","steelblue");
+
+</script>
+
+</body>
+</html>
